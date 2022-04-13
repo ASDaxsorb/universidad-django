@@ -1,0 +1,77 @@
+<!--prettier-ignore-->
+{% extends 'base.html' %} 
+
+{% block title %} 
+  Administrar cursos
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!--Add Course-->
+  <section class="col col-12 col-md-6 col-lg-4 mb-4 mb-md-0">
+    {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
+    {% endif %}
+
+    <h3 class="h1">Agregar Curso</h3>
+    <div class="card mt-4 text-center">
+      <form
+        class="card-body"
+        method="POST"
+        action="{% url 'academico:add_course' %}"
+      >
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            id="course_name"
+            name="course_name"
+            class="form-control"
+            placeholder="Nomre del curso"
+          />
+          <label for="course_name">Nombre del curso</label>
+        </div>
+        <div class="form-group mb-3">
+          <input
+            type="number"
+            id="credits"
+            name="credits"
+            class="form-control"
+            placeholder="Creditos"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!--List-->
+  <section class="col col-12 col-md-6 col-lg-8">
+    <h3 class="h1">Lista de cursos</h3>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Creditos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+          <tr>
+            <td>{{ course.id }}</td>
+            <td>{{ course.name | capfirst }}</td>
+            <td>{{ course.credits }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+{% endblock %}
