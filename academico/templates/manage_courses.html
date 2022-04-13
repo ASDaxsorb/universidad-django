@@ -59,6 +59,7 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Creditos</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +68,12 @@
             <td>{{ course.id }}</td>
             <td>{{ course.name | capfirst }}</td>
             <td>{{ course.credits }}</td>
+            <td>
+              <a href="#" class="btn btn-primary">Editar</a>
+            </td>
+            <td>
+              <a href="#" class="btn btn-danger">Eliminar</a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

@@ -1,5 +1,4 @@
-from traceback import TracebackException
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from .models import Course
 
@@ -21,6 +20,12 @@ def add_course(request):
         Course.objects.create(name=course_name, credits=credits)
     except Exception as error:
         courses = Course.objects.all()
-        return redirect(reverse("academico:home", kwargs={"error": error}))
+        return render(
+            request, "manage_courses.html", {"courses": courses, "error": error}
+        )
 
     return redirect(reverse("academico:home"))
+
+
+def delete_course(request, id):
+    course = get_object_or_404(Course, pk=id)
