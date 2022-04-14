@@ -35,7 +35,16 @@
             value="{{course.credits}}"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="row justify-content-evenly">
+          <button class="btn btn-primary col col-5" type="submit">
+            Guardar
+          </button>
+          <a
+            class="btn btn-danger col col-5"
+            href="{% url 'academico:home' %}"
+            >Cancelar</a
+          >
+        </div>
       </form>
     </div>
   </div>

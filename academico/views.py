@@ -1,10 +1,14 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from .models import Course
+from django.contrib import messages
 
 
 def home(request):
     courses = Course.objects.all()
+    if len(courses) > 0: 
+        messages.success(request, "Cursos Listados!")
+
     return render(request, "manage_courses.html", {"courses": courses})
 
 
@@ -30,6 +34,7 @@ def add_course(request):
 def delete_course(request, id):
     course = get_object_or_404(Course, pk=id)
     course.delete()
+    messages.success(request, "Curso eliminado")
 
     return redirect(reverse("academico:home"))
 
@@ -54,6 +59,7 @@ def update_course(request, id):
         course.name = name
         course.credits = credits
         course.save()
+        messages.success(request, "Curso actualizado!")
     except Exception as error:
         return render(request, "edit_course.html", {"course": course, "error": error})
 

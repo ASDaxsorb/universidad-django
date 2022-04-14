@@ -76,8 +76,13 @@ WSGI_APPLICATION = "universidad.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "universidad.db",
+        "ENGINE": "mssql",
+        "NAME": "django_universidad",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "BECDESARROLLO\MSSQLSERVER02",
+        "PORT": "",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server"},
     }
 }
 
