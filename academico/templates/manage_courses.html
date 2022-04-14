@@ -9,43 +9,40 @@
 <div class="row">
   <!--Add Course-->
   <section class="col col-12 col-md-6 col-lg-4 mb-4 mb-md-0">
-    {% if error %}
-    <div class="alert alert-danger">{{error}}</div>
-    {% endif %}
-
     <h3 class="h1">Agregar Curso</h3>
     <div class="card mt-4 text-center">
-      <form
-        class="card-body"
-        method="POST"
-        action="{% url 'academico:add_course' %}"
-      >
-        {% csrf_token %}
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            id="course_name"
-            name="course_name"
-            class="form-control"
-            placeholder="Nomre del curso"
-          />
-          <label for="course_name">Nombre del curso</label>
-        </div>
-        <div class="form-group mb-3">
-          <input
-            type="number"
-            id="credits"
-            name="credits"
-            class="form-control"
-            placeholder="Creditos"
-          />
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">
-            Guardar
-          </button>
-        </div>
-      </form>
+      <div class="card-body">
+        {% if error %}
+        <div class="alert alert-danger">{{error}}</div>
+        {% endif %}
+        <form method="POST" action="{% url 'academico:add_course'%}">
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              id="course_name"
+              name="course_name"
+              class="form-control"
+              placeholder="Nomre del curso"
+            />
+            <label for="course_name">Nombre del curso</label>
+          </div>
+          <div class="form-group mb-3">
+            <input
+              type="number"
+              id="credits"
+              name="credits"
+              class="form-control"
+              placeholder="Creditos"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -69,10 +66,18 @@
             <td>{{ course.name | capfirst }}</td>
             <td>{{ course.credits }}</td>
             <td>
-              <a href="#" class="btn btn-primary">Editar</a>
+              <a
+                href="{% url 'academico:edit_course' course.id %}"
+                class="btn btn-primary"
+                >Editar</a
+              >
             </td>
             <td>
-              <a href="#" class="btn btn-danger">Eliminar</a>
+              <a
+                href="{% url 'academico:delete_course' course.id %}"
+                class="btn btn-danger"
+                >Eliminar</a
+              >
             </td>
           </tr>
           {% endfor %}

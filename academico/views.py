@@ -29,3 +29,32 @@ def add_course(request):
 
 def delete_course(request, id):
     course = get_object_or_404(Course, pk=id)
+    course.delete()
+
+    return redirect(reverse("academico:home"))
+
+
+def edit_course(request, id):
+    course = get_object_or_404(Course, pk=id)
+    return render(request, "edit_course.html", {"course": course})
+
+
+def update_course(request, id):
+    try:
+        course = get_object_or_404(Course, pk=id)
+        name = request.POST["course_name"].strip().lower()
+        credits = request.POST["credits"]
+
+        if name == "":
+            raise Exception("The course must have a name")
+
+        if int(credits) < 0:
+            raise Exception("The credits mus be greather than 0")
+
+        course.name = name
+        course.credits = credits
+        course.save()
+    except Exception as error:
+        return render(request, "edit_course.html", {"course": course, "error": error})
+
+    return redirect(reverse("academico:home"))
