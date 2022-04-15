@@ -76,13 +76,12 @@ WSGI_APPLICATION = "universidad.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "mssql",
-        "NAME": "django_universidad",
-        "USER": "",
-        "PASSWORD": "",
-        "HOST": "BECDESARROLLO\MSSQLSERVER02",
-        "PORT": "",
-        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server"},
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "university_django",
+        "USER": "postgres",
+        "PASSWORD": "axell2552",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
