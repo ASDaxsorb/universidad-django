@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-bovzfbx^imj@8_kn@ia1ny_m1zp*pc82i476ee(1lw&arz)vse
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["university-django.herokuapp.com"]
 
 
 # Application definition
@@ -76,11 +77,11 @@ WSGI_APPLICATION = "universidad.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "university_django",
-        "USER": "postgres",
-        "PASSWORD": "axell2552",
-        "HOST": "localhost",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "d66lr95tkuami9",
+        "USER": "rrhrncikrzmjhc",
+        "PASSWORD": "cece7f29517341daf604cc18e4b2f074b38237766c751a2b84144e955f0b228a",
+        "HOST": "ec2-52-203-118-49.compute-1.amazonaws.com",
         "PORT": "5432",
     }
 }
@@ -120,7 +121,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = "static/"
+# STATIC_URL = "static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

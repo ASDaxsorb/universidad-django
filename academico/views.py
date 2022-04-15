@@ -15,7 +15,7 @@ def home(request):
 def add_course(request):
 
     try:
-        course_name = request.POST["course_name"]
+        course_name = request.POST["course_name"].strip().lower()
         credits = request.POST["credits"]
 
         if course_name.strip() == "":
