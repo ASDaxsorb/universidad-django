@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-import django_heroku
 from pathlib import Path
+import django_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-bovzfbx^imj@8_kn@ia1ny_m1zp*pc82i476ee(1lw&arz)vse"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["university-django.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost, university-django.herokuapp.com"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "whitenoise.runserver_nostatic",
     "academico",
 ]
 
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "'whitenoise.middleware.WhiteNoiseMiddleware'",
 ]
 
 ROOT_URLCONF = "universidad.urls"
@@ -78,13 +80,16 @@ WSGI_APPLICATION = "universidad.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "d66lr95tkuami9",
-        "USER": "rrhrncikrzmjhc",
-        "PASSWORD": "cece7f29517341daf604cc18e4b2f074b38237766c751a2b84144e955f0b228a",
-        "HOST": "ec2-52-203-118-49.compute-1.amazonaws.com",
+        "NAME": "da41ged2i5nnnu",
+        "USER": "mxmegvhcajxtbj",
+        "PASSWORD": "d236ba4f25c04c9c2345f458f8131d75fd7513d735e9e2108812519cd6169a70",
+        "HOST": "ec2-34-192-210-139.compute-1.amazonaws.com",
         "PORT": "5432",
     }
 }
+
+db_from_env = django_database_url.config(conn_max_age=600)
+DATABASES["default"].update(db_from_env)
 
 
 # Password validation
@@ -125,7 +130,8 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
-django_heroku.settings(locals())
+STATICFILES_DIRS = os.path.join(BASE_DIR, "static")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
