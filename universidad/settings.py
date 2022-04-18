@@ -77,7 +77,7 @@ WSGI_APPLICATION = "universidad.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "d66lr95tkuami9",
         "USER": "rrhrncikrzmjhc",
         "PASSWORD": "cece7f29517341daf604cc18e4b2f074b38237766c751a2b84144e955f0b228a",
